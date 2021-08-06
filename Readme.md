@@ -6,7 +6,7 @@
 
 <br/>
 
-## **Initial note**
+# **Initial note**
 Load this script to your page: ```dim-bootstrap-plus```.
 
 I did not bother to write full documentation for this. Just study the example in the link above (file ```index.html```) and you will understand everything. If you need something special, only then I mention it below.
@@ -16,18 +16,20 @@ In general, use arrays (or arrays of arrays), instead of the huge html blocks of
 <hr>
 <hr>
 
-## **Custom components**
+# **Custom components**
 <hr>
 
-`Select` element. 
-<br>`id` is mandatory. Use an array of `[value,text]` items :
+### `Select` element. 
+`id` is mandatory. Use an array of `[value,text]` items :
 ```HTML
-<bootstrap-select id="myselect">[['0','select'],['1','good'],['2','mediocre'],['3','bad']]</bootstrap-select>
+<bootstrap-select id="myselect">
+    [['0','select'],['1','good'],['2','mediocre'],['3','bad']]
+</bootstrap-select>
 ```
 <hr>
 
-`Switch`, `radio` and `check` element. 
-<br>Use an array of `[id,text]` items  for the `switch`, and the `radio` element. Use an array of `[id,value,text]` items for the `check` element:
+### `Switch`, `radio` and `check` element. 
+Use an array of `[id,text]` items  for the `switch`, and the `radio` element. Use an array of `[id,value,text]` items for the `check` element:
 ```HTML
 <bootstrap-switch>
     [['ids1','first option'],['ids2','second option'],['ids3','third option']]
@@ -41,10 +43,10 @@ In general, use arrays (or arrays of arrays), instead of the huge html blocks of
 ```
 <hr>
 
-`Droprown` menu. 
-<br>`id` is optional. Use a `[text,link]` array for links, a `[text,(empty),buttonID]` for button, or a `['hr']` elements for an hr:
+### `Droprown` menu. 
+Use a `[text,link]` array for links, a `[text,(empty),buttonID]` for button, or a `['hr']` elements for an hr:
 ```HTML
-<bootstrap-dropdown id="mydropdown" btn-class="btn-danger m-2" btn-caption="Click to open dropdown menu">
+<bootstrap-dropdown btn-class="btn-danger" btn-caption="Click to open dropdown menu">
     [['first link','/link1.html'],
     ['this is a button, not a link','(button)','buttonID'],
     ['hr'],
@@ -53,8 +55,8 @@ In general, use arrays (or arrays of arrays), instead of the huge html blocks of
 ```
 <hr>
 
-`Modal` component. 
-<br>`id` is mandatory. Use a `[title,bodytext,buttontext]` array. 
+### `Modal` component. 
+`id` is mandatory. Use a `[title,bodytext,buttontext]` array. 
 ```HTML
 <bootstrap-modal id="myModal">
     ['Modal title','This is the modal body which <b>is a paragraph.</b>','OK']
@@ -63,8 +65,8 @@ In general, use arrays (or arrays of arrays), instead of the huge html blocks of
 To open the above modal, use `data-bs-toggle="modal" data-bs-target="#myModal"` in your button, as Bootstrap suggests. The `data-bs-target` attribute must match the modal id.
 <hr>
 
-`Button` with `modal` **combined** in one component! WOW!
-<br>`modal-id` is mandatory. Use a `[togglebuttontext,modaltitle,modaltext,modalbuttontext]` array. 
+### `Button` with `modal` **combined** in one component! *WOW!*
+`modal-id` is mandatory. Use a `[togglebuttontext,modaltitle,modaltext,modalbuttontext]` array. 
 
 ```HTML
 <bootstrap-modal-button modal-id="myModalwithButton" btn-class="btn-warning">
@@ -73,17 +75,17 @@ To open the above modal, use `data-bs-toggle="modal" data-bs-target="#myModal"` 
 ```
 <hr>
 
-`Close button` compontent which closes its parent without extra code! WOW!
-<br>When you click on it, it hides its parent element
+### `Close button` compontent which closes its parent without extra code! *WOW!*
+When you click on it, it hides its parent element
 ```HTML
 <bootstrap-close-button></bootstrap-close-button>
 <bootstrap-close-button fix="true"></bootstrap-close-button>
 ```
-Use the first line by default to insert a `close button`. Only if it fails (because the parent has fixed, sticky or another unusual position property), use the second way.
+Use the first line by default to insert a `close button` . Only if it fails (because the parent has fixed, sticky or another unusual position property), use the second way.
 <hr>
 
-`Toast` component.
-<br>`id` is mandatory. `toast-color` is optional. Use a `[title,note,body]` array. 
+### `Toast` component.
+`id` is mandatory. `toast-color` is optional. Use a `[title,note,body]` array. 
 ```HTML
 <bootstrap-toast id="liveToast" toast-color="red">['Toast title','small note','This is the message of the toast.']</bootstrap-toast>
 ```
@@ -93,16 +95,16 @@ To show this modal, you can use a standard Bootstrap button with the appropriate
 ```
 <hr>
 
-`Spinner` component with nice caption below! WOW!
-<br>`color` is optional. Also, use (optional) text as a caption. 
+### `Spinner` component with nice caption below! *WOW!*
+`color` is optional. Also, use (optional) text as a caption. 
 
 ```HTML
 <bootstrap-spinner color="info">Waiting for something...</bootstrap-spinner>
 ```
 <hr>
 
-`Progress` component with ready-to-use method to change its value! WOW!
-<br>`id` is optional, but nessesary if you want to change its value with JavaScript.
+### `Progress` component with ready-to-use method to change its value! *WOW!*
+`id` is optional, but nessesary if you want to change its value with JavaScript.
 ```HTML
 <bootstrap-progress id="dimPercent" value="25%"></bootstrap-progress>
 ```
@@ -112,16 +114,18 @@ Plus.changeProgress('dimPercent','95%')
 ```
 <hr>
 
-`Accordion` component.
-<br>`id` is mandatory. Use an array with `[title,text]` elements.
+### `Accordion` component.
+`id` is mandatory. Use an array with `[title,text]` elements.
 ```HTML
 <bootstrap-accordion id="dimAccordion">
-    [['Accordion title #1','Accordion <b>content</b> #1'],['Accordion title #2','Accordion content #2'],['Accordion title #3','Accordion content #3']]
+    [['Accordion title #1','Accordion <b>content</b> #1'],
+    ['Accordion title #2','Accordion content #2'],
+    ['Accordion title #3','Accordion content #3']]
 </bootstrap-accordion>
 ```
 <hr>
 
-`List` component.
+### `List` component.
 Use a array of `text` items. 
 ```HTML
 <bootstrap-list>
@@ -133,7 +137,7 @@ Use a array of `text` items.
 <hr>
 <hr>
 
-## **Custom methods to make your life easier**
+# **Custom methods to make your life easier**
 
 
 Hides an element:
