@@ -1,8 +1,8 @@
 # dim-bootstrap-plus.js
  ## Ready-to-use Bootstrap components. 
- Avoid writing long HTML blocks of code (or complex Javascript code) for the most standard Bootstrap components. Use these custom HTML elements, and the appopriate elements will be created automatically.
+ Simplify your HTML blocks of code (or complex Javascript code) for the most standard Bootstrap components. Use these custom HTML elements, and the appopriate elements will be created automatically.
  ## By Dimitris Vainanidis (c) 2021. #
- Live Example here: 
+ Live Example here: https://dimvai.github.io/dim-bootstrap-plus/
 
 <br/>
 
@@ -87,6 +87,10 @@ Use the first line by default to insert a `close button`. Only if it fails (beca
 ```HTML
 <bootstrap-toast id="liveToast" toast-color="red">['Toast title','small note','This is the message of the toast.']</bootstrap-toast>
 ```
+To show this modal, you can use a standard Bootstrap button with the appropriate onclick with the matching modal id:
+```HTML
+<button type="button" class="btn btn-primary" onclick="Plus.showBootstrapToast('#liveToast')">Show live toast</button>
+```
 <hr>
 
 `Spinner` component with nice caption below! WOW!
@@ -127,6 +131,7 @@ Use a array of `text` items.
 
 
 <hr>
+<hr>
 
 ## **Custom methods to make your life easier**
 
@@ -139,12 +144,16 @@ Shows an element:
 ```Javascript
 Plus.show(elementID)
 ```
-Just execute this to enable all tooltips:
+Shows a toast (use `#` or `.` in the beginning of the id or the class):
+```Javascript
+Plus.showBootstrapToast(elementIDorClass)
+```
+Execute this to initiate/enable all tooltips:
 ```Javascript
 Plus.enableBootstrapTootlips()
 ```
 
-Just execute this to enable all popovers:
+Just execute this to initiate/enable all popovers:
 ```Javascript
 Plus.enableBootstrapPopovers()
 ```

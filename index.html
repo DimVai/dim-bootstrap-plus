@@ -28,24 +28,30 @@
         </bootstrap-check>
     </div>
    
-        <bootstrap-dropdown id="mydropdown" btn-class="btn-danger m-2" btn-caption="Click to open dropdown menu">
+        <bootstrap-dropdown id="mydropdown" btn-class="btn-primary m-2" btn-caption="Click to open dropdown menu">
             [['first link','/link1.html'],['this is a button, not a link','(button)','buttonID'],['hr'],['other link','/link3.html']]
         </bootstrap-dropdown>
         <hr>
 
-        <p>components without plus that we initialize using our custom plus functions: enableBootstrapTootlips() , enableBootstrapPopovers()</p>
-        <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top">
-            Tooltip on top
-          </button>
-          <button type="button" class="btn btn-danger" data-bs-toggle="popover" data-bs-placement="top" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
-        <hr>
+        <div class="p-2">
+            <p>Components that are not initialized by Bootstrap. 
+            <br>We initialize using our custom dum-bootstrap-plus functions: 
+            <br>Plus.enableBootstrapTootlips() , Plus.enableBootstrapPopovers()</p>
+            <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top">
+                Tooltip on top
+            </button>
+            <button type="button" class="btn btn-success" data-bs-toggle="popover" data-bs-placement="top" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+            <hr>
+        </div>
 
         <div id="parentexample" class="bg-light">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+            <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#myModal">
                 Launch demo modal
             </button><br>
-            <bootstrap-modal id="myModal">['Modal title','This is the modal body which <b>is a paragraph.</b> ','OK']</bootstrap-modal>
-            <bootstrap-modal-button modal-id="myModalwithButton" btn-class="btn-warning">
+            <bootstrap-modal id="myModal" >
+                ['Modal title','This is the modal body which <b>is a paragraph.</b> ','OK']
+            </bootstrap-modal>
+            <bootstrap-modal-button modal-id="myModalwithButton" btn-class="btn-warning m-2">
                 ['Modal button text','Modal title','This is the <b>modal body</b> which is a paragraph. ','OK']
             </bootstrap-modal-button>
             <br>
@@ -54,7 +60,7 @@
         </div>
         <hr>
 
-        <button type="button" class="btn btn-primary" onclick="showBootstrapToast('#liveToast')">Show live toast</button>
+        <button type="button" class="btn btn-danger m-2" onclick="Plus.showBootstrapToast('#liveToast')">Show live red toast</button>
         <bootstrap-toast id="liveToast" toast-color="red">['Toast title','small note','This is the message of the toast.']</bootstrap-toast>
    
 
