@@ -13,7 +13,29 @@ let Plus = {
     hide: (elementID) => {document.getElementById(elementID).classList.add('d-none')},
     show: (elementID) => {document.getElementById(elementID).classList.remove('d-none')},
     hideParent: function(element){element.parentElement.classList.add('d-none')},
+    addClassToClass: (baseClass,additionalClass)=>{
+        let elementList = document.querySelectorAll(baseClass);
+        elementList.forEach(element => element.classList.add(additionalClass));
+    },
+    changeCSSvariable: (variable,value) => {document.documentElement.style.setProperty(variable, value)},
 };
+
+
+class BootstrapAlert extends HTMLElement {
+    constructor(){
+        super();
+        let identity = this.id ? `id=${this.id}` : "";  
+        let alertClass = this.getAttribute('alert-class')||"";
+        this.outerHTML = `
+        <div ${identity} class="alert ${alertClass} alert-dismissible fade show" role="alert">
+            ${this.innerHTML}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        `;
+        this.classList.add("d-block");
+    }
+}
+window.customElements.define('bootstrap-alert',BootstrapAlert);
 
 //if it doesn't work properly, try <bootstrap-close-button fix="true"></bootstrap-close-button>
 class BootstrapCloseButton extends HTMLElement {
@@ -28,32 +50,37 @@ class BootstrapCloseButton extends HTMLElement {
     }
 window.customElements.define('bootstrap-close-button', BootstrapCloseButton );
 
+
 class BootstrapProgress extends HTMLElement {
     constructor(){
             super();
+            let identity = this.id ? `id=${this.id}-progress` : ""; 
             let percentage = this.getAttribute('value');
+            let bgColor = this.getAttribute('color') ? 'bg-' + this.getAttribute('color') : "";
             this.innerHTML = `
             <div class="progress">
-                <div id="${this.id}-progress" class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: ${percentage}"></div>
+                <div ${identity} class="progress-bar progress-bar-striped ${bgColor}" role="progressbar" style="width: ${percentage}"></div>
             </div>
             `;
+            this.classList.add("d-block");
         }
     }
-window.customElements.define('bootstrap-progress', BootstrapProgress );
+window.customElements.define('bootstrap-progress', BootstrapProgress);
 Plus.changeProgress = (elementID, value) => {
-    console.log(document.getElementById(elementID+'-progress'));
     document.getElementById(elementID+'-progress').style.width = value;
 };
 
 class BootstrapList extends HTMLElement {
     constructor(){
             super();
-            let identity = this.id ? `id=${this.id}` : "";        
+            let identity = this.id ? `id=${this.id}` : "";
+            let classes = this.getAttribute('class')||"";
             let inputArray = eval(this.innerHTML); 
             let listItems = inputArray.map(item => `<li class="list-group-item list-group-item-action">${item}</li>`);
             this.outerHTML = `
-            <ul ${identity} class="list-group">${listItems.join('')}</ul>
+            <ul ${identity} class="list-group ${classes}">${listItems.join('')}</ul>
             `;
+            this.classList.add("d-block");
         }
     }
 window.customElements.define('bootstrap-list', BootstrapList );
@@ -61,16 +88,16 @@ window.customElements.define('bootstrap-list', BootstrapList );
 
 class BootstrapSpinner extends HTMLElement {
         constructor(){
-            super();
-            let identity = this.id ? `id=${this.id}` : "";        
-            this.outerHTML = `
+            super();     
+            this.innerHTML = `
             <div class="d-flex flex-column align-items-center">
-                <div ${identity} class="spinner-border text-${this.getAttribute('color')||'dark'} m-2" role="status">
+                <div class="spinner-border text-${this.getAttribute('color')||'dark'} m-2" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>
                 <div>${this.innerText}</div>
             </div>
             `;
+            this.classList.add("d-block");
         }
     }
 window.customElements.define('bootstrap-spinner',BootstrapSpinner);
@@ -78,6 +105,7 @@ window.customElements.define('bootstrap-spinner',BootstrapSpinner);
 class BootstrapAccordion extends HTMLElement {
         constructor(){
             super();        
+            let classes = this.getAttribute('class')||"";
             let next = ((int=1) => () => int++)();
             let itemsArray = eval(this.innerHTML);
             let accordionItems = itemsArray.map(item => {
@@ -95,8 +123,9 @@ class BootstrapAccordion extends HTMLElement {
                 </div>
             `});
             this.outerHTML = `
-            <div class="accordion" id="${this.id}">${accordionItems.join("")}</div>
+            <div class="accordion ${classes}" id="${this.id}">${accordionItems.join("")}</div>
             `;
+            this.classList.add("d-block");
         }
     }
 window.customElements.define('bootstrap-accordion',BootstrapAccordion);
@@ -105,7 +134,7 @@ window.customElements.define('bootstrap-accordion',BootstrapAccordion);
 class BootstrapToast extends HTMLElement {
     constructor(){
         super();
-        let toastColor = this.getAttribute('toast-color');
+        let toastColor = this.getAttribute('color');
         let inputArray = eval(this.innerHTML);  
         this.outerHTML = `
             <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
@@ -157,20 +186,20 @@ class BootstrapModalButton extends HTMLElement {
         let inputArray = eval(this.innerHTML);        
         this.innerHTML = `
             <button type="button" class="btn ${btnClass}" data-bs-toggle="modal" data-bs-target="#${modalId}">
-                ${inputArray[0]}
+                ${this.getAttribute('btn-caption')}
             </button>
             <div class="modal fade" id="${modalId}" tabindex="-1">
                 <div class="modal-dialog">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="${modalId}Label">${inputArray[1]}</h5>
+                        <h5 class="modal-title" id="${modalId}Label">${inputArray[0]}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        ${inputArray[2]}
+                        ${inputArray[1]}
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">${inputArray[3]}</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">${inputArray[2]}</button>
                     </div>
                     </div>
                 </div>
@@ -211,8 +240,8 @@ class BootstrapDropDown extends HTMLElement {
         super();        
         let identity = this.id ? `id=${this.id}` : "";
         let itemsArray = eval(this.innerText);
-        let btnClass = this.getAttribute('btn-class');
-        let buttonCaption = this.getAttribute('btn-caption');
+        let btnClass = this.getAttribute('btn-class')||"";
+        let buttonCaption = this.getAttribute('btn-caption')||"";
         let items = itemsArray.map(item => {
             if (item[0]=="hr") {return `<li><hr class="dropdown-divider"></li>`}
             if (item[2]) {return `<li><button class="dropdown-item" id="${item[2]}">${item[0]}</button>`}
@@ -236,16 +265,18 @@ class BootstrapRadio extends HTMLElement {
     constructor(){
         super();        
         let options = eval(this.innerHTML);
+        let radioName = this.getAttribute('radio-name')||"";
         this.innerText = '';
         options.forEach(element => {
             this.innerHTML += `
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadio" id="${element[0]}">
+                    <input class="form-check-input" type="radio" name="${radioName}" id="${element[0]}">
                     <label class="form-check-label" for="${element[0]}">
                         ${element[1]}
                     </label>
                 </div>
-        `;
+            `;
+            this.classList.add("d-block");
         });          
     }
 }
@@ -260,11 +291,10 @@ class BootstrapCheck extends HTMLElement {
             this.innerHTML += `
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="${element[1]}" id="${element[0]}">
-                    <label class="form-check-label" for="${element[0]}">
-                        ${element[2]}
-                    </label>
+                    <label class="form-check-label" for="${element[0]}">${element[2]}</label>
                 </div>
             `;
+            this.classList.add("d-block");
         });          
     }
 }
@@ -278,11 +308,12 @@ class BootstrapSwitch extends HTMLElement {
         options.forEach(element => {
             this.innerHTML += `
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="${element[0]}">
-                <label class="form-check-label" for="${element[0]}">${element[1]}</label>
+                <input class="form-check-input" type="checkbox" value="${element[1]}" id="${element[0]}">
+                <label class="form-check-label" for="${element[0]}">${element[2]}</label>
             </div>
-        `;
-        });          
+            `;
+            this.classList.add("d-block");
+            });          
     }
 }
 window.customElements.define('bootstrap-switch',BootstrapSwitch);
@@ -292,11 +323,17 @@ class BootstrapSelect extends HTMLElement {
     constructor(){
         super();              
         let identity = this.id ? `id=${this.id}` : "";
+        let classes = this.getAttribute('class')||"";
         let options = eval(this.innerText);
         let optionElements = options.map(element => `<option value="${element[0]}">${element[1]}</option>`);
         this.outerHTML = `
-        <select ${identity} class="form-select">${optionElements.join("")}</select>
+        <select ${identity} class="form-select ${classes}">${optionElements.join("")}</select>
         `;
+        this.classList.add("d-block");
     }
 }
 window.customElements.define('bootstrap-select',BootstrapSelect);
+
+// Plus.makeAllButtonsGradient{
+
+// }

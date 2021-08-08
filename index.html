@@ -6,54 +6,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Bootstrap Plus</title>
+    <link rel="icon" type="image/png" href="bsplus.png" />
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="dim-plus-colors.css" rel="stylesheet">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script defer src="dim-bootstrap-plus.js"></script>
     <script defer src="custom-code.js"></script>
 
 </head>
 <body class="container p-5">
-        <bootstrap-select id="myselect">[['0','select'],['1','good'],['2','mediocre'],['3','bad']]</bootstrap-select>
+
+    <h1>Bootstrap-Plus showcase</h1>
+    <a href="color-showcase.html">See also the color showcase for this add-in!</a>
+
+
+
+    <bootstrap-alert id="myalert" alert-class="alert-success my-1">This is the content of my alert</bootstrap-alert>
+
+    <bootstrap-select id="myselect" class="my-1 bg-lavender">[['0','select'],['1','good'],['2','mediocre'],['3','bad']]</bootstrap-select>
 
     <div class="container mx-5 my-1 row">
         <bootstrap-switch class="col">
-            [['ids1','first option'],['ids2','second option'],['ids3','third option']]
+            [['ids1','1','first option'],['ids2','2','second option'],['ids3','3','third option']]
         </bootstrap-switch>
-        <bootstrap-radio class="col">
-            [['idr1','first option'],['idr2','second option'],['idr3','third option']]
-        </bootstrap-radio>
         <bootstrap-check class="col" id="mycheck">
             [['idc1','1','first option'],['idc2','2','second option'],['idc3','3','third option']]
         </bootstrap-check>
+        <bootstrap-radio class="col" radio-name="myradio">
+            [['idr1','first option'],['idr2','second option'],['idr3','third option']]
+        </bootstrap-radio>
     </div>
    
-        <bootstrap-dropdown id="mydropdown" btn-class="btn-primary m-2" btn-caption="Click to open dropdown menu">
-            [['first link','/link1.html'],['this is a button, not a link','(button)','buttonID'],['hr'],['other link','/link3.html']]
-        </bootstrap-dropdown>
-        <hr>
 
-        <div class="p-2">
-            <p>Components that are not initialized by Bootstrap. 
-            <br>We initialize using our custom dum-bootstrap-plus functions: 
-            <br>Plus.enableBootstrapTootlips() , Plus.enableBootstrapPopovers()</p>
-            <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top">
-                Tooltip on top
-            </button>
-            <button type="button" class="btn btn-success" data-bs-toggle="popover" data-bs-placement="top" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
-            <hr>
-        </div>
+    <bootstrap-dropdown id="mydropdown" btn-class="btn-primary m-1" btn-caption="Click to open dropdown menu">
+        [['first link','/link1.html'],['this is a button, not a link','(button)','buttonID'],['hr'],['other link','/link3.html']]
+    </bootstrap-dropdown>
+    <hr>
+
+
 
         <div id="parentexample" class="bg-light">
-            <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#myModal">
+
+            <button type="button" class="btn btn-info m-2" data-bs-toggle="modal" data-bs-target="#myModal">
                 Launch demo modal
             </button><br>
-            <bootstrap-modal id="myModal" >
+            <bootstrap-modal id="myModal">
                 ['Modal title','This is the modal body which <b>is a paragraph.</b> ','OK']
             </bootstrap-modal>
-            <bootstrap-modal-button modal-id="myModalwithButton" btn-class="btn-warning m-2">
-                ['Modal button text','Modal title','This is the <b>modal body</b> which is a paragraph. ','OK']
+
+
+            <bootstrap-modal-button modal-id="myModalwithButton" btn-class="btn-warning m-2" btn-caption="Modal button text">
+                ['Modal title','This is the <b>modal body</b> which is a paragraph. ','OK']
             </bootstrap-modal-button>
+
+
             <br>
             <bootstrap-close-button></bootstrap-close-button>
             <!-- <bootstrap-close-button fix="true"></bootstrap-close-button> -->
@@ -61,27 +68,28 @@
         <hr>
 
         <button type="button" class="btn btn-danger m-2" onclick="Plus.showBootstrapToast('#liveToast')">Show live red toast</button>
-        <bootstrap-toast id="liveToast" toast-color="red">['Toast title','small note','This is the message of the toast.']</bootstrap-toast>
+        <bootstrap-toast id="liveToast" color="red">['Toast title','small note','This is the message of the toast.']</bootstrap-toast>
    
 
         <hr>
-        <bootstrap-spinner color="info">Waiting for something...</bootstrap-spinner>
+        <bootstrap-spinner id="myspinner" color="info" class="m-1">Waiting for something...</bootstrap-spinner>
         <hr>
 
-        <bootstrap-progress id="dimPercent" value="25%"></bootstrap-progress>
+        <button class="btn btn-indigo my-2" onclick="Plus.changeProgress('dimPercent','95%')">Click to change percentage!</button>
+        <bootstrap-progress id="dimPercent" class="m-1" color="purple-plus" value="25%"></bootstrap-progress>
 
         
         <hr>
 
-
-        <bootstrap-accordion id="dimAccordion">
+        <p>testing margins</p>
+        <bootstrap-accordion id="dimAccordion" class="m-1">
             [['Accordion title #1','Accordion <b>content</b> #1'],['Accordion title #2','Accordion content #2'],['Accordion title #3','Accordion content #3']]
         </bootstrap-accordion>
 
 
         <hr>
 
-        <bootstrap-list>['An <b>item</b>','A second item','And a third one']</bootstrap-list>
+        <bootstrap-list id="listtest" class="m-1">['An <b>item</b>','A second item','And a third one']</bootstrap-list>
 
         <hr>
 
@@ -91,11 +99,19 @@
     </p>
 
 
+
+    <div class="p-2" id="justSimpleBootstrap">
+        <p>Components that are not initialized by Bootstrap. 
+        <br>We initialize using our custom dum-bootstrap-plus functions: 
+        <br>Plus.enableBootstrapTootlips() , Plus.enableBootstrapPopovers()</p>
+        <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top">
+            Tooltip on top
+        </button>
+        <button type="button" class="btn btn-success" data-bs-toggle="popover" data-bs-placement="top" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+        <hr>
+    </div>
+
+
    
-
-<script>
-
-</script>
-
 </body>
 </html>

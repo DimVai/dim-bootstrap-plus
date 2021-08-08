@@ -5,3 +5,5 @@
 //root.style.setProperty('--primary','red');
 
 //Plus.changeProgress('dimPercent','95%');
+
+Plus.addClassToClass('.btn','bg-gradient');
