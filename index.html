@@ -18,56 +18,54 @@
 <body class="container p-5">
 
     <h1>Bootstrap-Plus showcase</h1>
-    <a href="color-showcase.html">See also the color showcase for this add-in!</a>
-
 
 
     <bootstrap-alert id="myalert" alert-class="alert-success my-1">This is the content of my alert</bootstrap-alert>
 
-    <bootstrap-select id="myselect" class="my-1 bg-lavender">[['0','select'],['1','good'],['2','mediocre'],['3','bad']]</bootstrap-select>
-
-    <div class="container mx-5 my-1 row">
-        <bootstrap-switch class="col">
-            [['ids1','1','first option'],['ids2','2','second option'],['ids3','3','third option']]
-        </bootstrap-switch>
-        <bootstrap-check class="col" id="mycheck">
-            [['idc1','1','first option'],['idc2','2','second option'],['idc3','3','third option']]
-        </bootstrap-check>
-        <bootstrap-radio class="col" radio-name="myradio">
-            [['idr1','first option'],['idr2','second option'],['idr3','third option']]
-        </bootstrap-radio>
+    <hr>
+    <div class="bg-lavender">
+    <bootstrap-dropdown-button id="mydropdownbuton" btn-class="btn-primary m-1" btn-caption="Click to open dropdown button">
+        [
+            ['first link','/link1.html'],
+            ['this is a button, not a link','(button)','buttonID'],
+            ['hr'],
+            ['other link','/link3.html']
+        ]
+    </bootstrap-dropdown-button>
+    
+    <bootstrap-dropdown id="simpledropdown" class="mx-5 p-2" caption="Click to open plain dropdown" direction-class="dropend">        
+        [
+            ['first link','/link1.html'],
+            ['this is a button, not a link','(button)','buttonID'],
+            ['hr'],
+            ['other link','/link3.html']
+        ]   
+</bootstrap-dropdown>
     </div>
-   
 
-    <bootstrap-dropdown id="mydropdown" btn-class="btn-primary m-1" btn-caption="Click to open dropdown menu">
-        [['first link','/link1.html'],['this is a button, not a link','(button)','buttonID'],['hr'],['other link','/link3.html']]
-    </bootstrap-dropdown>
+
     <hr>
 
-
-
-        <div id="parentexample" class="bg-light">
-
-            <button type="button" class="btn btn-info m-2" data-bs-toggle="modal" data-bs-target="#myModal">
+        <div id="parentexample" class="bg-light p-2">
+            <p>This is a regular button that opens a Boostrap-Plus modal component:
+            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal">
                 Launch demo modal
-            </button><br>
+            </button></p>
             <bootstrap-modal id="myModal">
                 ['Modal title','This is the modal body which <b>is a paragraph.</b> ','OK']
             </bootstrap-modal>
 
+            <p>This is a combined button-modal component!
+            <bootstrap-modal-button class="d-inline" modal-id="myModalwithButton" btn-class="btn-warning" btn-caption="Modal button text">
+                ['Modal title','This is the <b>modal body</b> which is a paragraph. This came from a combined button + modal component. ','OK']
+            </bootstrap-modal-button></p>
 
-            <bootstrap-modal-button modal-id="myModalwithButton" btn-class="btn-warning m-2" btn-caption="Modal button text">
-                ['Modal title','This is the <b>modal body</b> which is a paragraph. ','OK']
-            </bootstrap-modal-button>
-
-
-            <br>
             <bootstrap-close-button></bootstrap-close-button>
             <!-- <bootstrap-close-button fix="true"></bootstrap-close-button> -->
         </div>
         <hr>
 
-        <button type="button" class="btn btn-danger m-2" onclick="Plus.showBootstrapToast('#liveToast')">Show live red toast</button>
+        <button type="button" class="btn btn-danger m-2" onclick="Plus.showToast('#liveToast')">Show ready red toast!</button>
         <bootstrap-toast id="liveToast" color="red">['Toast title','small note','This is the message of the toast.']</bootstrap-toast>
    
 
@@ -76,12 +74,45 @@
         <hr>
 
         <button class="btn btn-indigo my-2" onclick="Plus.changeProgress('dimPercent','95%')">Click to change percentage!</button>
+        <span>The command is: <code class="bg-lavender">Plus.changeProgress('dimPercent','95%')</code></span>
         <bootstrap-progress id="dimPercent" class="m-1" color="purple-plus" value="25%"></bootstrap-progress>
 
+        <hr><hr>
+
+        <h4>Bootstrap icons</h4>
+        <p>We have a <bootstrap-icon>check-circle-fill</bootstrap-icon> icon ready to use. Also, we have a
+            <bootstrap-icon>info-circle-fill</bootstrap-icon> icon, a 
+            <bootstrap-icon>question-circle-fill</bootstrap-icon> icon, a 
+            <bootstrap-icon>exclamation-triangle-fill</bootstrap-icon> icon, a  
+            <bootstrap-icon>x-circle-fill</bootstrap-icon> icon, and a 
+            <bootstrap-icon>list</bootstrap-icon> icon. 
+            <br>Finally, there is a <bootstrap-icon size="2rem">check-circle-fill</bootstrap-icon> icon with size!</p>
+            <p>Now I can do this in one HTML line! 
+                <button class="btn btn-purple-plus"><bootstrap-icon size="1.5rem">list</bootstrap-icon></button>
+                (a list bootstrap-icon inside a purple-plus button)
+            </p>
+            
+        <a href="color-showcase.html">See also the color showcase for this add-in!</a>
+
+        <hr>
         
+        <bootstrap-select id="myselect" class="my-1 bg-snow">[['0','select'],['1','good'],['2','mediocre'],['3','bad']]</bootstrap-select>
+
+        <div class="row mx-5 my-1">
+            <bootstrap-switch class="col" id="myswitch">
+                [['ids1','1','first option'],['ids2','2','second option','checked'],['ids3','3','third option']]
+            </bootstrap-switch>
+            <bootstrap-check class="col" id="mycheck">
+                [['idc1','1','first option'],['idc2','2','second option'],['idc3','3','third option', 'checked']]
+            </bootstrap-check>
+            <bootstrap-radio class="col" radio-name="myradio" id="myradio">
+                [['idr1','1','first option'],['idr2','2','second option'],['idr3','3','third option', 'checked']]
+            </bootstrap-radio>
+        </div>
+
+
         <hr>
 
-        <p>testing margins</p>
         <bootstrap-accordion id="dimAccordion" class="m-1">
             [['Accordion title #1','Accordion <b>content</b> #1'],['Accordion title #2','Accordion content #2'],['Accordion title #3','Accordion content #3']]
         </bootstrap-accordion>
@@ -93,23 +124,25 @@
 
         <hr>
 
-        <p>Try these commands (in console or in your javascript):
+        <div class="p-2" id="justSimpleBootstrap">
+        <p><strong>Try these commands (in browser's console or in your javascript):</strong>
         <br> Plus.changeProgress('dimPercent','95%')
+        <br> Plus.showModal('myModal')
+        <br> Plus.showToast('#liveToast')
         <br> Plus.hide('dimAccordion')
-    </p>
+        </p>
 
 
 
-    <div class="p-2" id="justSimpleBootstrap">
-        <p>Components that are not initialized by Bootstrap. 
-        <br>We initialize using our custom dum-bootstrap-plus functions: 
+        <p><strong>Bootstrap Components that are not initialized by default :</strong>
+        <br>We initialize using our easy-to-use bootstrap-plus functions:
         <br>Plus.enableBootstrapTootlips() , Plus.enableBootstrapPopovers()</p>
         <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top">
             Tooltip on top
         </button>
         <button type="button" class="btn btn-success" data-bs-toggle="popover" data-bs-placement="top" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+        </div>
         <hr>
-    </div>
 
 
    

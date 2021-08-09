@@ -186,14 +186,6 @@
     background-color: hsl(240, 67%, 91%);
     color: var(--bs-dark);
 }
-.btn-plum{
-    background-color: hsl(300, 47%, 75%);
-    color: var(--bs-dark);
-}
-.btn-plum:hover{
-    background-color: hsl(300, 47%, 69%);
-    color: var(--bs-dark);
-}
 .btn-violet{
     background-color: hsl(300, 76%, 72%);
     color: var(--bs-dark);
@@ -210,7 +202,22 @@
     background-color: hsl(291, 64%, 36%);
     color: var(--bs-light);
 }
-
+.btn-red-plus{
+    background-color: hsl(0, 100%, 42%);
+    color: var(--bs-light);
+}
+.btn-red-plus:hover{
+    background-color: hsl(4, 90%, 52%);
+    color: var(--bs-light);
+}
+.btn-orange-plus{
+    background-color: hsl(14, 100%, 57%);
+    color: var(--bs-light);
+}
+.btn-orange-plus:hover{
+    background-color: hsl(16, 100%, 47%);
+    color: var(--bs-light);
+}
 /*************************  text  ****************************/
 
 .text-purple{
@@ -284,14 +291,17 @@
 .text-lavender{
     color: lavender;
 }
-.text-plum{
-    color: plum;
-}
 .text-violet{
     color: violet;
 }
 .text-purple-plus{
     color: hsl(291, 64%, 36%);
+}
+.text-red-plus{
+    color: red;
+}
+.text-orange-plus{
+    color: hsl(14, 100%, 57%);
 }
 
 /*************************  bg  ****************************/
@@ -368,14 +378,17 @@
 .bg-lavender{
     background-color: lavender;
 }
-.bg-plum{
-    background-color: plum;
-}
 .bg-violet{
     background-color:violet;
 }
 .bg-purple-plus{
     background-color: #9c27b0;
+}
+.bg-red-plus{
+    background-color: red;
+}
+.bg-orange-plus{
+    background-color: hsl(14, 100%, 57%);
 }
 
 .bg-sand{
