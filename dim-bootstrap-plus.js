@@ -1,40 +1,134 @@
 /**
  * @file dim-bootstrap-plus.
+ * @author Dimitris Vainanidis,
  * @copyright Dimitris Vainanidis 2021
  */
 
 /* jshint unused:false , strict:global , esversion: 10, evil:true*/
 "use strict"; 
-
 let bootstrap = window.bootstrap;       //tell jshint to ignore bootstrap
 
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////     Bootstrap Plus Object & Methods   ///////////////////////////////////////////
+
 let Plus = {
-    hide: (elementID) => {document.getElementById(elementID).classList.add('d-none')},
-    show: (elementID) => {document.getElementById(elementID).classList.remove('d-none')},
-    hideParent: function(element){element.parentElement.classList.add('d-none')},
-    addClass: (baseClass,additionalClass)=>{
-        let elementList = document.querySelectorAll(baseClass);
-        elementList.forEach(element => element.classList.add(additionalClass));
-    },
-    changeCSSvariable: (variable,value) => {document.documentElement.style.setProperty(variable, value)},
-};
 
-Plus.enableBootstrapTootlips = () => {
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl);
-    });
-    return 'tooltips enabled';
-};
-
-Plus.enableBootstrapPopovers = () => {
-    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-        return new bootstrap.Popover(popoverTriggerEl);
+    /** 
+     * Initiates/enables all Bootstrap tooltips 
+     * @type void
+    */
+    enableBootstrapTooltips: () => {
+        let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
         });
-    return 'popovers enabled';
+        return 'tooltips enabled';
+    },
+    /** 
+     * Initiates/enables all Bootstrap popovers 
+     * @type void
+    */
+    enableBootstrapPopovers: () => {
+        let popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+            let popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+                return new bootstrap.Popover(popoverTriggerEl);
+            });
+        return 'popovers enabled';
+    },
+    /** 
+     * Enables the use of custom colors in your HTML code without the need for CSS 
+     * @type void
+    */
+    enableCustomColors:() => {
+        let customButtons = document.querySelectorAll('[data-plus-btn]');
+        customButtons.forEach(function (element) {
+            element.style.backgroundColor = element.attributes['data-plus-btn'].value;
+            element.style.color = 'white';
+        });
+        if (customButtons.length > 0){
+            var sheet = window.document.styleSheets[0];
+            sheet.insertRule('[data-plus-btn]:hover{filter: brightness(95%);}',sheet.cssRules.length);
+        }
+        document.querySelectorAll('[data-plus-background]').forEach(function (element) {
+            element.style.backgroundColor = element.attributes['data-plus-background'].value;
+        });
+        document.querySelectorAll('[data-plus-color]').forEach(function (element) {
+            element.style.color = element.attributes['data-plus-color'].value;
+        });
+        return 'custom colors enabled';
+    },
+
+     /** 
+     * Shows a specific modal 
+     * @type {(modalId: string) => void}  
+    */
+         showModal: modalId => {
+            let myModal = new bootstrap.Modal(document.getElementById(modalId));
+            myModal.show();
+        },
+    /** 
+     * Shows a specific toast 
+     * @param {string}  toastIdOrClass - The toast's class or id (use "#" or ".") 
+     * @param {number}  duration - The toast's duration in milliseconds (default=10000)
+    */
+    showToast: (toastIdOrClass, duration=10000) => {
+        var toastElList = [].slice.call(document.querySelectorAll(toastIdOrClass));
+        let toastList = toastElList.map(function (toastEl) {
+            return new bootstrap.Toast(toastEl, {delay: duration});
+        });
+        toastList.forEach(toast => toast.show());
+    },
+    /** 
+     * Changes the percentage of a Plus Progress component 
+     * @type {(elementID: string, value: number ) => void}  
+    */
+    changeProgress: (elementID, value) => {
+        document.getElementById(elementID+'-progress').style.width = value;
+    },
+
 };
+
+
+
+/******  More Plus methods but t hey are out here so they are not dieplayd using in Plus Object via JSdoc documentation.  *******************/
+
+/** 
+ * Hides an element 
+ * @type {(elementID: string) => void}  
+*/
+Plus.hide = (elementID) => {document.getElementById(elementID).classList.add('d-none')};
+    /** 
+     * Shows an element 
+     * @type {(elementID: string) => void}  
+ */
+Plus.show = (elementID) => {document.getElementById(elementID).classList.remove('d-none')};
+    /** 
+     * Hide an element's parent 
+     * @type {(elementID: string) => void}  
+ */
+Plus.hideParent = function(element){element.parentElement.classList.add('d-none')};
+    /** 
+     * Adds a class to specific elements
+     * @param {string}  elements - The element's class or id (use "#" or ".")
+     * @param {string}  additionalClass - The  class to be added (do not use ".")
+     * */
+Plus.addClass = (elements,additionalClass)=>{
+        let elementList = document.querySelectorAll(elements);
+        elementList.forEach(element => element.classList.add(additionalClass));
+    };
+    /** 
+     * Change the value of a css variable 
+     * @type {(variable: string, value: string) => void}  
+ */
+Plus.changeCSSvariable = (variable,value) => {document.documentElement.style.setProperty(variable, value)};
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////     Bootstrap Plus Custom Elements    //////////////////////////////////////////
 
 
 class BootstrapIcon extends HTMLElement {
@@ -109,6 +203,7 @@ class BootstrapAlert extends HTMLElement {
 }
 window.customElements.define('bootstrap-alert',BootstrapAlert);
 
+
 //if it doesn't work properly, try <bootstrap-close-button fix="true"></bootstrap-close-button>
 class BootstrapCloseButton extends HTMLElement {
     constructor(){
@@ -138,9 +233,7 @@ class BootstrapProgress extends HTMLElement {
         }
     }
 window.customElements.define('bootstrap-progress', BootstrapProgress);
-Plus.changeProgress = (elementID, value) => {
-    document.getElementById(elementID+'-progress').style.width = value;
-};
+
 
 class BootstrapList extends HTMLElement {
     constructor(){
@@ -172,6 +265,7 @@ class BootstrapSpinner extends HTMLElement {
         }
     }
 window.customElements.define('bootstrap-spinner',BootstrapSpinner);
+
 
 class BootstrapAccordion extends HTMLElement {
         constructor(){
@@ -222,13 +316,6 @@ class BootstrapToast extends HTMLElement {
     }
 }
 window.customElements.define('bootstrap-toast',BootstrapToast);
-Plus.showToast = (toastIdOrClass, duration=10000) => {
-    var toastElList = [].slice.call(document.querySelectorAll(toastIdOrClass));
-    let toastList = toastElList.map(function (toastEl) {
-        return new bootstrap.Toast(toastEl, {delay: duration});
-    });
-    toastList.forEach(toast => toast.show());
-};
 
 
 class BootstrapModalButton extends HTMLElement {
@@ -262,6 +349,7 @@ class BootstrapModalButton extends HTMLElement {
 }
 window.customElements.define('bootstrap-modal-button',BootstrapModalButton);
 
+
 class BootstrapModal extends HTMLElement {
     constructor(){
         super();
@@ -287,10 +375,7 @@ class BootstrapModal extends HTMLElement {
     }
 }
 window.customElements.define('bootstrap-modal',BootstrapModal);
-Plus.showModal = modalId => {
-    let myModal = new bootstrap.Modal(document.getElementById(modalId));
-    myModal.show();
-};
+
 
 class BootstrapDropDownButton extends HTMLElement {
     constructor(){
@@ -318,6 +403,7 @@ class BootstrapDropDownButton extends HTMLElement {
     }
 }
 window.customElements.define('bootstrap-dropdown-button',BootstrapDropDownButton);
+
 
 class BootstrapDropDown extends HTMLElement {
     constructor(){
@@ -369,6 +455,7 @@ class BootstrapRadio extends HTMLElement {
 }
 window.customElements.define('bootstrap-radio',BootstrapRadio);
 
+
 class BootstrapCheck extends HTMLElement {
     constructor(){
         super();        
@@ -387,6 +474,7 @@ class BootstrapCheck extends HTMLElement {
     }
 }
 window.customElements.define('bootstrap-check',BootstrapCheck);
+
 
 class BootstrapSwitch extends HTMLElement {
     constructor(){

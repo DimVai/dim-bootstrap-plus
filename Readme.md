@@ -1,21 +1,29 @@
 # dim-bootstrap-plus.js
  ## Ready-to-use Bootstrap components. 
- Simplify your HTML blocks of code (or complex Javascript code) for the most standard Bootstrap components. Use these custom HTML elements, and the appopriate elements will be created automatically.
+ 
+ Simplify your huge and complex Bootstrap's HTML (or JavaScript) code, when you need the most standard Bootstrap components. 
+ Use these simple custom HTML elements, and the appopriate Bootstrap code will be created automatically!!!
+ 
+ Also, enrich your color capabilities with a lot of additional colors, or completely custom code (without the need to write CSS code)!
  ## By Dimitris Vainanidis (c) 2021. #
  Live Example here: https://dimvai.github.io/dim-bootstrap-plus/
 
 <br/>
 
 # **Initial note**
-Load this script to your page: ```dim-bootstrap-plus```.
-```html
- <script defer src="dim-bootstrap-plus.js"></script>
-```
 
-I did not bother to write full documentation for this. Just open the link above (file ```index.html```), read the following notes and you will understand everything. Only If you need something special, I mention it below.
+
+I did not bother to write full documentation for this. Just open the link above (file ```index.html```), and read the following notes. 
+You will understand everything. Only If you need something special, I mention it below.
 
 In general, use arrays (or arrays of arrays), instead of the huge html blocks of code that is provided by Bootstrap 5.
 
+Some `<bootstrap-*>` elements will be automatically replaced by the desired code, some other `<bootstrap-*>` elements will have the code inside them. 
+
+Start by loading the  ```dim-bootstrap-plus``` script to your page:
+```html
+ <script defer src="dim-bootstrap-plus.js"></script>
+```
 <hr>
 <hr>
 
@@ -25,7 +33,7 @@ In general, use arrays (or arrays of arrays), instead of the huge html blocks of
 ### `Alert` element with a dismiss button. 
 Just write a simple code like this:
 ```HTML
-<bootstrap-alert id="myalert" alert-class="alert-success my-1">
+<bootstrap-alert alert-class="alert-success my-1">
     This is the content of my alert!
 </bootstrap-alert>
 ```
@@ -37,7 +45,7 @@ Use simply an array of elements inside the component's text. Each element (of th
 - a `[text,(button),buttonID]` array element for a button menu utem, or
 - a `['hr']` element for an hr menu item.
 
-`btn-caption` attribute is mandatory. `btn-class`, and `direction-class` (read below) are optional. Example:
+`btn-caption` attribute is mandatory. `btn-class`, and `direction-class` (read below) are optional. Example for a menu with 4 items (one item per line):
 ```HTML
     <bootstrap-dropdown-button btn-class="btn-primary m-1" btn-caption="Open dropdown">
             [
@@ -97,10 +105,10 @@ When you click on it, it hides its parent element
 <bootstrap-close-button></bootstrap-close-button>               //default way
 <bootstrap-close-button fix="true"></bootstrap-close-button>    //alternative way
 ```
-*Note:* Use the first default way to insert a `close button` . Only if it fails (because the parent has fixed, sticky or another unusual position property), use the second way.
+*Note:* Use the first default way to insert a `close button` . Only if it fails (this could happen if the parent has fixed, sticky or another unusual position property), use the second way.
 <hr>
 
-### `Toast` component with ready-to-use trigger. 
+### `Toast` component with ready-to-use trigger. *WOW!*
 `id` is mandatory. `toast-color` is optional and can use any valid HTML color (not just "Bootstrap" colors). Use a `[title,note,body]` array. 
 ```HTML
 <bootstrap-toast id="liveToast" toast-color="red">
@@ -115,8 +123,8 @@ To show this modal, you can use a standard Bootstrap button with the appropriate
 ```
 <hr>
 
-### `Spinner` component with nice caption below! *WOW!*
-`color` is optional, but you must provie a valid "Bootstrap" or "Bootstrap-Plus" color. Also, use (optional) text as a caption. 
+### `Spinner` component with nice caption below! *Nice!*
+`color` is optional, but if you use it, you must provie a valid "Bootstrap" or "Bootstrap-Plus" color (eg. "primary", "success", etc). Also, use (optional) text as a caption. 
 
 ```HTML
 <bootstrap-spinner color="info">Waiting for something...</bootstrap-spinner>
@@ -124,7 +132,7 @@ To show this modal, you can use a standard Bootstrap button with the appropriate
 <hr>
 
 ### `Progress` component with ready-to-use method to change its value! *WOW!*
-`id` is optional, but nessesary if you want to change its value with JavaScript.
+`id` is optional in general. It nessesary, though, if you want to change its value with JavaScript. `color` can be any valid css color (not just bootstrap colors). 
 ```HTML
 <bootstrap-progress id="dimPercent" color="fuchsia" value="25%"></bootstrap-progress>
 ```
@@ -199,7 +207,7 @@ Use an array of `[id,value,text]` items for the `switch` and the `check` element
 <hr>
 
 # **Bootstrap icons**
-I have included a few icon for easy import. `size` attribute is optional. 
+I have included a few icons for easy import, in case you don't want to import the separate Bootstrap icon library. `size` attribute is optional. 
 
 ```HTML
     <bootstrap-icon size="2rem">check-circle-fill</bootstrap-icon>
@@ -215,6 +223,26 @@ I have included a few icon for easy import. `size` attribute is optional.
 
 # **Custom methods to make your life easier**
 
+## **Helper methods for general purpose**
+
+Execute this to initiate/enable all tooltips:
+```Javascript
+Plus.enableBootstrapTooltips()
+```
+Execute this to initiate/enable all popovers:
+```Javascript
+Plus.enableBootstrapPopovers()
+```
+Add an additional class to all elements with a specific class or id. For example, add a gradient background to all buttons. Note the `#` or `.` on the first argument (which works like the querySelectorAll) but not on the second:
+```Javascript
+Plus.addClass('.btn','bg-gradient')
+```
+Enable the use of custom colors in your HTML code without the need for CSS (read more below):
+```Javascript
+Plus.enableCustomColors();
+```
+
+## **Helper methods for manipulating specific components**
 
 Hides an element:
 ```Javascript
@@ -224,7 +252,7 @@ Shows an element:
 ```Javascript
 Plus.show(elementID)
 ```
-Shows a specific toast or more toasts (use `#` or `.` in the beginning of the id or the class) with optional duration (default duration is 10sec):
+Shows a specific toast or more toasts (use `#` or `.` in the beginning of the id or the class) with optional duration in milliseconds (default duration is 10sec):
 ```Javascript
 Plus.showToast(elementIDorClass, duration)
 ```
@@ -236,20 +264,12 @@ Changes the value of a specific progress component (if it is declared using the 
 ```Javascript
 Plus.changeProgress(idOfComponent,value)
 ```
-Execute this to initiate/enable all tooltips:
-```Javascript
-Plus.enableBootstrapTootlips()
-```
 
-Just execute this to initiate/enable all popovers:
-```Javascript
-Plus.enableBootstrapPopovers()
-```
 
-Add an additional class to all elements with a specific class or id. For example, add a gradient background to all buttons. Note the `#` or `.` on the first argument (which works like the querySelectorAll) but not on the second:
-```Javascript
-Plus.addClass('.btn','bg-gradient')
-```
+
+
+
+
 
 <hr>
 <hr>
@@ -268,6 +288,27 @@ To use an button, text or background with a special Bootstrap-Plus color, write:
 <span class="bg-purple text-light">light text in a purple background</span>
 ```
 
+
+<hr>
+<hr>
+
+
+# **Completely custom colors for text, barkgrounds and buttons**
+Run this code in your custom js, after the DOM loads:
+```Javascript
+Plus.enableCustomColors();
+```
+
+Then, you can use any valid css color in html for your elements using `data-plus-*` attributes:
+```HTML
+<p data-plus-color="DeepSkyBlue">This is a custom "DeepSkyBlue" colored text</p>
+<p data-plus-background="PapayaWhip">This is a text with custom "PapayaWhip" background</p>
+<button class="btn" data-plus-btn="Chocolate" >This is a custom "Chocolate" button</button>
+<button class="btn m-2" data-plus-btn="Crimson" data-plus-color="HoneyDew">
+    This is a custom "Crimson" button with "HoneyDew" text
+</button>
+```
+These custom colors doesn't need the `dim-plus-colors.css` to run.
 
 <hr>
 <hr>

@@ -6,3 +6,5 @@
 //Plus.changeProgress('dimPercent','95%');
 
 Plus.addClass('.btn','bg-gradient');
+
+Plus.enableCustomColors();
