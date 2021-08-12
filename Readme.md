@@ -2,7 +2,7 @@
  ## Ready-to-use Bootstrap components. 
  
  Simplify your huge and complex Bootstrap's HTML (or JavaScript) code, when you need the most standard Bootstrap components. 
- Use these simple custom HTML elements, and the appopriate Bootstrap code will be created automatically!!!
+ Use these simple custom HTML elements, and the appropriate Bootstrap code will be created automatically!!!
  
  Also, enrich your color capabilities with a lot of additional colors, or completely custom code (without the need to write CSS code)!
  ## By Dimitris Vainanidis (c) 2021. #
@@ -39,10 +39,10 @@ Just write a simple code like this:
 ```
 <hr>
 
-### `Button` with `Droprown` menu. 
+### `Button` with `Dropdown` menu. 
 Use simply an array of elements inside the component's text. Each element (of the array) corresponds to a menu item. For every item use:
 - a `[text,link]` array element for a link menu item,
-- a `[text,(button),buttonID]` array element for a button menu utem, or
+- a `[text,(button),buttonID]` array element for a button menu item, or
 - a `['hr']` element for an hr menu item.
 
 `btn-caption` attribute is mandatory. `btn-class`, and `direction-class` (read below) are optional. Example for a menu with 4 items (one item per line):
@@ -58,7 +58,7 @@ Use simply an array of elements inside the component's text. Each element (of th
 ```
 <hr>
 
-### Simple `Droprown` menu. 
+### Simple `Dropdown` menu. 
 Like the previous case, but it shows simple text as a trigger, not a button. Only the `caption` attribute is mandatory. Notice the optional `direction-class` argument that sets the direction of the opened menu, that is also valid in the above `bootstrap-dropdown-button`.
 ```HTML
     <bootstrap-dropdown class="mx-5 p-2" caption="Open dropdown" direction-class="dropend">        
@@ -92,14 +92,14 @@ Alternatively, you can use the original Boostrap's way: Set `data-bs-toggle="mod
 `modal-id` is mandatory. Use a `[modaltitle,modaltext,modalbuttontext]` array. 
 
 ```HTML
-<bootstrap-modal-button modal-id="myModalwithButton" 
+<bootstrap-modal-button modal-id="myModalWithButton" 
     btn-class="btn-warning m-2" btn-caption="Modal button text">
     ['Modal title','This is the <b>modal body</b> which is a paragraph. ','OK']
 </bootstrap-modal-button>
 ```
 <hr>
 
-### `Close button` compontent which closes its parent without extra code! *WOW!*
+### `Close button` component which closes its parent without extra code! *WOW!*
 When you click on it, it hides its parent element
 ```HTML
 <bootstrap-close-button></bootstrap-close-button>               //default way
@@ -124,7 +124,7 @@ To show this modal, you can use a standard Bootstrap button with the appropriate
 <hr>
 
 ### `Spinner` component with nice caption below! *Nice!*
-`color` is optional, but if you use it, you must provie a valid "Bootstrap" or "Bootstrap-Plus" color (eg. "primary", "success", etc). Also, use (optional) text as a caption. 
+`color` is optional, but if you use it, you must provide a valid "Bootstrap" or "Bootstrap-Plus" color (eg. "primary", "success", etc). Also, use (optional) text as a caption. 
 
 ```HTML
 <bootstrap-spinner color="info">Waiting for something...</bootstrap-spinner>
@@ -293,7 +293,7 @@ To use an button, text or background with a special Bootstrap-Plus color, write:
 <hr>
 
 
-# **Completely custom colors for text, barkgrounds and buttons**
+# **Completely custom colors for text, backgrounds and buttons**
 Run this code in your custom js, after the DOM loads:
 ```Javascript
 Plus.enableCustomColors();
