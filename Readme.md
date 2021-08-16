@@ -18,11 +18,11 @@ You will understand everything. Only If you need something special, I mention it
 
 In general, use arrays (or arrays of arrays), instead of the huge html blocks of code that is provided by Bootstrap 5.
 
-Some `<bootstrap-*>` elements will be automatically replaced by the desired code, some other `<bootstrap-*>` elements will have the code inside them. 
+Some `<bootstrap-*>` elements will be automatically replaced by the desired code, some other `<bootstrap-*>` elements will inject the code inside them. 
 
 Start by loading the  ```dim-bootstrap-plus``` script to your page:
 ```html
- <script defer src="dim-bootstrap-plus.js"></script>
+ <script defer src="https://dimvai.github.io/dim-bootstrap-plus/dim-bootstrap-plus.js"></script>
 ```
 <hr>
 <hr>
@@ -33,10 +33,11 @@ Start by loading the  ```dim-bootstrap-plus``` script to your page:
 ### `Alert` element with a dismiss button. 
 Just write a simple code like this:
 ```HTML
-<bootstrap-alert alert-class="alert-success my-1">
+<bootstrap-alert alert-class="alert-success">
     This is the content of my alert!
 </bootstrap-alert>
 ```
+You may add any additional classes in the `alert class` attribute, for example `alert-class="alert-success m-1 p-3"`. 
 <hr>
 
 ### `Button` with `Dropdown` menu. 
@@ -45,7 +46,7 @@ Use simply an array of elements inside the component's text. Each element (of th
 - a `[text,(button),buttonID]` array element for a button menu item, or
 - a `['hr']` element for an hr menu item.
 
-`btn-caption` attribute is mandatory. `btn-class`, and `direction-class` (read below) are optional. Example for a menu with 4 items (one item per line):
+`btn-caption` attribute is mandatory. `btn-class` (which can have the desired color class, like `btn-primary`), and `direction-class` (read the next component about this) are optional. Example for a menu with 4 items (one item per line):
 ```HTML
     <bootstrap-dropdown-button btn-class="btn-primary m-1" btn-caption="Open dropdown">
             [
@@ -59,7 +60,7 @@ Use simply an array of elements inside the component's text. Each element (of th
 <hr>
 
 ### Simple `Dropdown` menu. 
-Like the previous case, but it shows simple text as a trigger, not a button. Only the `caption` attribute is mandatory. Notice the optional `direction-class` argument that sets the direction of the opened menu, that is also valid in the above `bootstrap-dropdown-button`.
+Like the previous case, but it shows simple text as a trigger, instead of a button. Only the `caption` attribute is mandatory. Notice the optional `direction-class` argument that sets the direction of the opened menu, that is also valid in the above `bootstrap-dropdown-button`.
 ```HTML
     <bootstrap-dropdown class="mx-5 p-2" caption="Open dropdown" direction-class="dropend">        
             [
@@ -73,6 +74,23 @@ Like the previous case, but it shows simple text as a trigger, not a button. Onl
 *Note:* You may want to use original bootstrap's way for navigation (`navbar`) dropdowns.
   
 <hr>
+
+### `Carousel` component. 
+`id` is mandatory (`class` is optional). Use an array with items of the form `[image-source, image-alt]`, one item per image. 
+```HTML
+        <bootstrap-carousel id="myCarousel" class="w-50">
+                [
+                    ['images/img1.jpeg','first image'],
+                    ['images/img2.jpeg','second image'],
+                    ['images/img3.jpeg','third image'],
+                    ['images/img4.jpeg','forth image'],
+                ]
+        </bootstrap-carousel>
+```
+*Note:* You may want to use original bootstrap's way for navigation (`navbar`) dropdowns.
+  
+<hr>
+
 
 ### `Modal` component. 
 `id` is mandatory. Use a `[title,bodytext,buttontext]` array. 
@@ -134,11 +152,11 @@ To show this modal, you can use a standard Bootstrap button with the appropriate
 ### `Progress` component with ready-to-use method to change its value! *WOW!*
 `id` is optional in general. It nessesary, though, if you want to change its value with JavaScript. `color` can be any valid css color (not just bootstrap colors). 
 ```HTML
-<bootstrap-progress id="dimPercent" color="fuchsia" value="25%"></bootstrap-progress>
+<bootstrap-progress id="dimProgress" color="fuchsia" value="25%"></bootstrap-progress>
 ```
 To change its value, run the following command with the matching id:
 ```JavaScript
-Plus.changeProgress('dimPercent','95%')
+Plus.changeProgress('dimProgress','95%')
 ```
 <hr>
 
@@ -278,7 +296,7 @@ Plus.changeProgress(idOfComponent,value)
 # **More colors**
 Visit page `color-showcase.html` to see what is available if you import dim-plus-colors.css:
 ```HTML
-<link href="dim-plus-colors.css" rel="stylesheet">
+<link href="https://dimvai.github.io/dim-bootstrap-plus/dim-plus-colors.css" rel="stylesheet">
 ```
 
 To use an button, text or background with a special Bootstrap-Plus color, write:
@@ -299,7 +317,7 @@ Run this code in your custom js, after the DOM loads:
 Plus.enableCustomColors();
 ```
 
-Then, you can use any valid css color in html for your elements using `data-plus-*` attributes:
+Then, you can use any valid CSS color in html for your elements using `data-plus-*` attributes:
 ```HTML
 <p data-plus-color="DeepSkyBlue">This is a custom "DeepSkyBlue" colored text</p>
 <p data-plus-background="PapayaWhip">This is a text with custom "PapayaWhip" background</p>

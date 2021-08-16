@@ -188,6 +188,51 @@ class BootstrapIcon extends HTMLElement {
 window.customElements.define('bootstrap-icon',BootstrapIcon);
 
 
+class BootstrapCarousel extends HTMLElement {
+    constructor(){
+        super();
+       //${this.id}  
+       let imagesArray = eval(this.innerText);
+       let classes = this.getAttribute('class')||"";
+       let imagesDIVS = '';
+       let buttonsDIVS = '';
+       for (let i = 0; i<imagesArray.length;) {
+            let carouselClass = i==0 ? 'active' : '';
+            let buttonClass = i==0 ? 'class="active"' : '';
+            buttonsDIVS +=`         
+                <button type="button" data-bs-target="#${this.id} " data-bs-slide-to="${i}" ${buttonClass}></button>
+            `;
+            imagesDIVS += `
+                <div class="carousel-item ${carouselClass}">
+                    <img src="${imagesArray[i][0]}" class="d-block w-100" alt="${imagesArray[i][1]}">
+                </div>
+            `;
+            i++;
+         }
+        this.outerHTML = `
+        <div id="${this.id}" class="carousel slide ${classes}" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            ${buttonsDIVS}
+        </div>
+        <div class="carousel-inner">
+            ${imagesDIVS}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#${this.id} " data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#${this.id} " data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+        `;
+    }
+}
+window.customElements.define('bootstrap-carousel', BootstrapCarousel);
+
+
+
 class BootstrapAlert extends HTMLElement {
     constructor(){
         super();
@@ -437,7 +482,7 @@ class BootstrapRadio extends HTMLElement {
     constructor(){
         super();      
         let options = eval(this.innerHTML);
-        let radioName = this.getAttribute('radio-name')||"";
+        let radioName = this.getAttribute('radio-name')||"radioName";
         this.innerText = '';
         options.forEach(element => {
             let checked = element[3]=='checked' ? 'checked' : "";

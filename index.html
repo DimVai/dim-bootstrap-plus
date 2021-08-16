@@ -12,6 +12,7 @@
     <link href="dim-plus-colors.css" rel="stylesheet">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script defer src="dim-bootstrap-plus.js"></script>
+    <!-- <script defer src="https://dimvai.github.io/dim-bootstrap-plus/dim-bootstrap-plus.js"></script> -->
     <script defer src="custom-code.js"></script>
 
 </head>
@@ -73,9 +74,9 @@
         <bootstrap-spinner id="myspinner" color="info" class="m-1">Waiting for something...</bootstrap-spinner>
         <hr>
 
-        <button class="btn btn-purple-plus my-2" onclick="Plus.changeProgress('dimPercent','95%')">Click to change percentage!</button>
-        <span>The command is: <code class="bg-lavender">Plus.changeProgress('dimPercent','95%')</code></span>
-        <bootstrap-progress id="dimPercent" class="m-1" color="purple-plus" value="25%"></bootstrap-progress>
+        <button class="btn btn-purple-plus my-2" onclick="Plus.changeProgress('dimProgress','95%')">Click to change percentage!</button>
+        <span>The command is: <code class="bg-lavender">Plus.changeProgress('dimProgress','95%')</code></span>
+        <bootstrap-progress id="dimProgress" class="m-1" color="purple-plus" value="25%"></bootstrap-progress>
 
         <hr><hr>
 
@@ -126,7 +127,7 @@
 
         <div class="p-2" id="justSimpleBootstrap">
         <p><strong>Try these commands (in browser's console or in your javascript):</strong>
-        <br> Plus.changeProgress('dimPercent','95%')
+        <br> Plus.changeProgress('dimProgress','95%')
         <br> Plus.showModal('myModal')
         <br> Plus.showToast('#liveToast')
         <br> Plus.hide('dimAccordion')
@@ -145,6 +146,14 @@
         <hr>
 
 
+        <bootstrap-carousel id="myCarousel" class="w-50">
+                [
+                    ['images/img1.jpeg','first image'],
+                    ['images/img2.jpeg','second image'],
+                    ['images/img3.jpeg','third image'],
+                    ['images/img4.jpeg','forth image'],
+                ]
+        </bootstrap-carousel>
    
 </body>
 </html>
