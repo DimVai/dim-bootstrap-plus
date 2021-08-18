@@ -24,7 +24,7 @@ let Plus = {
         let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl);
         });
-        return 'tooltips enabled';
+        return tooltipList;
     },
     /** 
      * Initiates/enables all Bootstrap popovers 
@@ -35,7 +35,7 @@ let Plus = {
             let popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
                 return new bootstrap.Popover(popoverTriggerEl);
             });
-        return 'popovers enabled';
+        return popoverList;
     },
     /** 
      * Enables the use of custom colors in your HTML code without the need for CSS 
@@ -57,17 +57,18 @@ let Plus = {
         document.querySelectorAll('[data-plus-color]').forEach(function (element) {
             element.style.color = element.attributes['data-plus-color'].value;
         });
-        return 'custom colors enabled';
+        return "custom colors enabled";
     },
 
      /** 
      * Shows a specific modal 
      * @type {(modalId: string) => void}  
     */
-         showModal: modalId => {
-            let myModal = new bootstrap.Modal(document.getElementById(modalId));
-            myModal.show();
-        },
+    showModal: modalId => {
+        let theModal = new bootstrap.Modal(document.getElementById(modalId));
+        theModal.show();
+        return theModal;
+    },
     /** 
      * Shows a specific toast 
      * @param {string}  toastIdOrClass - The toast's class or id (use "#" or ".") 
@@ -79,6 +80,7 @@ let Plus = {
             return new bootstrap.Toast(toastEl, {delay: duration});
         });
         toastList.forEach(toast => toast.show());
+        return toastList;
     },
     /** 
      * Changes the percentage of a Plus Progress component 
@@ -86,6 +88,7 @@ let Plus = {
     */
     changeProgress: (elementID, value) => {
         document.getElementById(elementID+'-progress').style.width = value;
+        return document.getElementById(elementID);
     },
 
 };
@@ -98,17 +101,25 @@ let Plus = {
  * Hides an element 
  * @type {(elementID: string) => void}  
 */
-Plus.hide = (elementID) => {document.getElementById(elementID).classList.add('d-none')};
+Plus.hide = (elementID) => {
+    let element = document.getElementById(elementID);
+    element.classList.add('d-none');
+    return element;
+};
     /** 
      * Shows an element 
      * @type {(elementID: string) => void}  
  */
-Plus.show = (elementID) => {document.getElementById(elementID).classList.remove('d-none')};
+Plus.show = (elementID) => {
+    let element = document.getElementById(elementID);
+    element.classList.remove('d-none');
+    return element;
+};
     /** 
      * Hide an element's parent 
      * @type {(elementID: string) => void}  
  */
-Plus.hideParent = function(element){element.parentElement.classList.add('d-none')};
+Plus.hideParent = function(element){element.parentElement.classList.add('d-none'); return element.parentElement};
     /** 
      * Adds a class to specific elements
      * @param {string}  elements - The element's class or id (use "#" or ".")
@@ -117,12 +128,13 @@ Plus.hideParent = function(element){element.parentElement.classList.add('d-none'
 Plus.addClass = (elements,additionalClass)=>{
         let elementList = document.querySelectorAll(elements);
         elementList.forEach(element => element.classList.add(additionalClass));
+        return elementList;
     };
     /** 
      * Change the value of a css variable 
      * @type {(variable: string, value: string) => void}  
  */
-Plus.changeCSSvariable = (variable,value) => {document.documentElement.style.setProperty(variable, value)};
+Plus.changeCSSvariable = (variable,value) => {document.documentElement.style.setProperty(variable, value); return value};
 
 
 
@@ -196,7 +208,7 @@ class BootstrapCarousel extends HTMLElement {
        let classes = this.getAttribute('class')||"";
        let imagesDIVS = '';
        let buttonsDIVS = '';
-       for (let i = 0; i<imagesArray.length;) {
+       for (let i = 0, len = imagesArray.length; i<len; i++) {
             let carouselClass = i==0 ? 'active' : '';
             let buttonClass = i==0 ? 'class="active"' : '';
             buttonsDIVS +=`         
@@ -207,7 +219,6 @@ class BootstrapCarousel extends HTMLElement {
                     <img src="${imagesArray[i][0]}" class="d-block w-100" alt="${imagesArray[i][1]}">
                 </div>
             `;
-            i++;
          }
         this.outerHTML = `
         <div id="${this.id}" class="carousel slide ${classes}" data-bs-ride="carousel">
