@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Bootstrap Plus</title>
+    <link rel="icon" type="image/png" href="bsplus.png" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- <link href="dim-plus-colors.css" rel="stylesheet"> -->
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script defer src="dim-bootstrap-plus.js"></script>
+    <!-- <script defer src="https://dimvai.github.io/dim-bootstrap-plus/dim-bootstrap-plus.js"></script> -->
+    <!-- <script defer src="custom-code.js"></script> -->
+
+</head>
+<body class="container p-5">
+
+    <h1>Bootstrap-Plus Nested (Χέστιντ!)</h1>
+
+
+    <style>
+        /* .dropdown-submenu:hover > .dropdown-menu{
+            display: block;
+        } */
+        /* .dropdown-submenu-area{
+          inset: 10% auto auto 95%; 
+        } */
+        /* @media (min-width: 600px) {
+            .dropdown-submenu-area{
+              inset: 10% auto auto 95%; 
+          }
+        } */
+        /*inset: 95% auto auto 5%; */
+    </style>
+
+
+
+      <hr>
+
+ <div class="d-lg-flex justify-content-between">
+
+      <!-- Example single danger button -->
+      <div>
+    <div class="btn-group">
+    <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+      Action to end
+    </button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">Action</a></li>
+      <li><a class="dropdown-item" href="#">Another action</a></li>
+      <li><a class="dropdown-item" href="#">Something else here that makes the menu larger</a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item" href="#">Separated link</a></li>
+
+
+      <div class="dropdown-submenu dropend">
+        <button type="button" class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" >
+          Dropright submenu
+        </button>
+        <ul class="dropdown-menu" style="inset: 10% auto auto 95%">
+          <!-- Dropdown menu links -->
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+      </div>
+
+
+      <li><a class="dropdown-item" href="#">Another action</a></li>
+
+    </ul>
+  </div>
+</div>
+
+
+
+
+
+  <div>
+    <div class="btn-group">
+    <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+      Action to end
+    </button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">Action</a></li>
+      <li><a class="dropdown-item" href="#">Another action</a></li>
+      <li><a class="dropdown-item" href="#">Something else here</a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item" href="#">Separated link</a></li>
+
+
+      <div class="dropdown-submenu dropdown">
+        <button type="button" class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" >
+          Dropdown submenu
+        </button>
+        <ul class="dropdown-menu" style="inset: 80% auto auto 10%">
+          <!-- Dropdown menu links -->
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+      </div>
+
+      
+      <li><a class="dropdown-item" href="#">Another action</a></li>
+
+    </ul>
+  </div>
+
+</div>
+  <!-- transform: translate(-100px);  -->
+
+</div>
+
+<hr>
+
+<hr>
+
+
+<div class="btn-group dropend">
+  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    Dropright
+  </button>
+  <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">Action</a></li>
+      <li><a class="dropdown-item" href="#">Another action</a></li>
+      <li><a class="dropdown-item" href="#">Something else here</a></li>
+  </ul>
+</div>
+
+<hr>
+
+<div class="d-lg-flex justify-content-between">
+
+<bootstrap-dropdown-button id="mydropdownbutonwithsub" btn-class="btn-primary m-1" btn-caption="New nested dropdown menu" direction-class="dropend">
+  [
+      ['first link','/link1.html'],
+      ['this is a button, not a link','(button)','buttonID'],
+      ['hr'],
+      ['submenu caption','(submenu)',[
+        ['first','first'],
+        ['second','second'],
+        ['third button','(button)','third'],
+      ]],
+      ['other link','/link3.html']
+  ]
+</bootstrap-dropdown-button>
+
+
+<bootstrap-dropdown-button id="mydropdownbutonwithsub2" btn-class="btn-primary m-1" btn-caption="New nested dropdown menu">
+  [
+      ['first link','/link1.html'],
+      ['this is a button, not a link','(button)','buttonID'],
+      ['hr'],
+      ['submenu caption','(submenu)',[
+        ['first','first'],
+        ['second','second'],
+        ['third button','(button)','third'],
+      ]],
+      ['other link','/link3.html']
+  ]
+</bootstrap-dropdown-button>
+
+
+<bootstrap-dropdown id="testingdropdown" class="mx-5 p-2" caption="Click to open plain dropdown" >        
+  [
+      ['first link','/link1.html'],
+      ['this is a button, not a link','(button)','buttonID'],
+      ['hr'],
+      ['submenu caption','(submenu)',[
+        ['first big','first'],
+        ['second','second'],
+          ['submenu','(submenu)',[
+          ['first','first'],
+          ['second','second'],
+          ['third button big caption','(button)','third'],
+        ]],
+        ['third','(button)','third'],
+      ]],
+      ['other link','/link3.html']
+  ]   
+</bootstrap-dropdown>
+
+</div>
+
+
+
+  <script>
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

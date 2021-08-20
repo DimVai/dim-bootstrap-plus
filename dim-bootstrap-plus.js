@@ -432,61 +432,91 @@ class BootstrapModal extends HTMLElement {
 }
 window.customElements.define('bootstrap-modal',BootstrapModal);
 
+/** Converts an array of ['caption','link'] elements to a list of li elements */
+let itemsArrayToItems = itemsArray => itemsArray.map(item => {           
+    if (item[0]=="hr") {return `<li><hr class="dropdown-divider"></li>`}
+      if (item[1]=='(submenu)')  
+        {
+          let direction = window.innerWidth >= 576 ? 'dropend' : 'dropdown';
+          return `
+            <div class="dropdown-submenu ${direction}">
+            <button type="button" class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown">
+                ${item[0]}
+            </button>
+            <ul class="dropdown-menu dropdown-submenu-area" style="inset: 10% auto auto 95%">
+                ${itemsArrayToItems(item[2]).join('')}
+            </ul>
+            </div>
+          `}
+      if (item[2]) {return `<li><button class="dropdown-item" id="${item[2]}">${item[0]}</button>`}
+      return `<li><a class="dropdown-item" href="${item[1]}">${item[0]}</a></li>`;
+  });
+
+class BootstrapDropDown extends HTMLElement {
+constructor(){
+  super();        
+  let identity = this.id ? `id=${this.id}` : "";
+  let itemsArray = eval(this.innerText);
+  let classes = this.getAttribute('class')||"";
+  let directionClass = this.getAttribute('direction-class')||"";
+  let caption = this.getAttribute('caption')||"";
+  let items = itemsArrayToItems(itemsArray);
+  this.outerHTML = `
+      <div ${identity} class="d-inline-block ${classes} ${directionClass}">
+          <span role="button" class="dropdown-toggle" href="#" data-bs-toggle="dropdown">
+              ${caption}
+          </span>
+          <ul class="dropdown-menu">
+              ${items.join('')}
+          </ul>
+      </div>
+  `;
+}
+}
+window.customElements.define('bootstrap-dropdown',BootstrapDropDown);
 
 class BootstrapDropDownButton extends HTMLElement {
-    constructor(){
-        super();        
-        let identity = this.id ? `id=${this.id}` : "";
-        let itemsArray = eval(this.innerText);
-        let btnClass = this.getAttribute('btn-class')||"";
-        let buttonCaption = this.getAttribute('btn-caption')||"";
-        let directionClass = this.getAttribute('direction-class')||"";
-        let items = itemsArray.map(item => {
-            if (item[0]=="hr") {return `<li><hr class="dropdown-divider"></li>`}
-            if (item[2]) {return `<li><button class="dropdown-item" id="${item[2]}">${item[0]}</button>`}
-            return `<li><a class="dropdown-item" href="${item[1]}">${item[0]}</a></li>`;
-        });
-        this.outerHTML = `
-            <div ${identity} class="btn-group ${directionClass}">
-                <button type="button" class="btn ${btnClass} dropdown-toggle" data-bs-toggle="dropdown">
-                    ${buttonCaption}
-                </button>
-                <ul class="dropdown-menu">
-                    ${items.join('')}
-                </ul>
-            </div>
-        `;
-    }
+constructor(){
+  super();        
+  let identity = this.id ? `id=${this.id}` : "";
+  let itemsArray = eval(this.innerText);
+  let btnClass = this.getAttribute('btn-class')||"";
+  let buttonCaption = this.getAttribute('btn-caption')||"";
+  let directionClass = this.getAttribute('direction-class')||"";
+  let items = itemsArrayToItems(itemsArray);
+  this.outerHTML = `
+      <div ${identity} class="btn-group ${directionClass}">
+          <button type="button" class="btn ${btnClass} dropdown-toggle" data-bs-toggle="dropdown">
+              ${buttonCaption}
+          </button>
+          <ul class="dropdown-menu">
+              ${items.join('')}
+          </ul>
+      </div>
+  `;
+}
 }
 window.customElements.define('bootstrap-dropdown-button',BootstrapDropDownButton);
 
 
-class BootstrapDropDown extends HTMLElement {
-    constructor(){
-        super();        
-        let identity = this.id ? `id=${this.id}` : "";
-        let itemsArray = eval(this.innerText);
-        let classes = this.getAttribute('class')||"";
-        let directionClass = this.getAttribute('direction-class')||"";
-        let caption = this.getAttribute('caption')||"";
-        let items = itemsArray.map(item => {
-            if (item[0]=="hr") {return `<li><hr class="dropdown-divider"></li>`}
-            if (item[2]) {return `<li><button class="dropdown-item" id="${item[2]}">${item[0]}</button>`}
-            return `<li><a class="dropdown-item" href="${item[1]}">${item[0]}</a></li>`;
-        });
-        this.outerHTML = `
-            <div ${identity} class="d-inline-block ${classes} ${directionClass}">
-                <span role="button" class="dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                    ${caption}
-                </span>
-                <ul class="dropdown-menu">
-                    ${items.join('')}
-                </ul>
-            </div>
-        `;
+var dropdownSubmenus = document.querySelectorAll(".dropdown-submenu");
+dropdownSubmenus.forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    let sumbenuArea = el.querySelector('.dropdown-submenu-area');  //not querySelectorAll !!!
+    sumbenuArea.style.display = "block";
+    let bounding = sumbenuArea.getBoundingClientRect();
+    if (bounding.right > window.innerWidth) {
+      let move = (el.offsetWidth*0.93 + sumbenuArea.offsetWidth);
+      sumbenuArea.style.transform = `translate(-${move}px)`;
+      bounding = sumbenuArea.getBoundingClientRect();  //new value
+      if (bounding.left < 0) { sumbenuArea.style.transform = `translate(-${sumbenuArea.offsetWidth}px,0.8em)`; }
     }
-}
-window.customElements.define('bootstrap-dropdown',BootstrapDropDown);
+  });
+  el.addEventListener('mouseleave',()=>{
+    let sumbenuAreas = el.querySelectorAll('.dropdown-submenu-area');   //Close all inside
+    sumbenuAreas.forEach(el=>el.style.display = "none");
+  });
+});
 
 
 class BootstrapRadio extends HTMLElement {
@@ -566,7 +596,3 @@ class BootstrapSelect extends HTMLElement {
     }
 }
 window.customElements.define('bootstrap-select',BootstrapSelect);
-
-// Plus.makeAllButtonsGradient{
-
-// }

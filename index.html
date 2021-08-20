@@ -42,6 +42,23 @@
             ['other link','/link3.html']
         ]   
 </bootstrap-dropdown>
+
+
+<bootstrap-dropdown-button btn-class="btn-danger m-1" btn-caption="Nested dropdown menu!">
+    [
+        ['first link','/link1.html'],
+        ['this is a button, not a link','(button)','buttonID'],
+        ['hr'],
+        ['submenu caption','(submenu)',[
+            ['first subitem','/page1.html'],
+            ['second subitem','/page2.html'],
+            ['third subbutton','(button)','buttonID'],
+        ]],
+        ['other link','/link3.html']
+    ]
+  </bootstrap-dropdown-button>
+
+
     </div>
 
 
@@ -49,7 +66,7 @@
 
         <div id="parentexample" class="bg-light p-2">
             <p>This is a regular button that opens a Bootstrap-Plus modal component:
-            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal">
+            <button type="button" class="btn btn-info" onclick="Plus.showModal('myModal')">
                 Launch demo modal
             </button></p>
             <bootstrap-modal id="myModal">

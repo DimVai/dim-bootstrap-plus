@@ -75,6 +75,29 @@ Like the previous case, but it shows simple text as a trigger, instead of a butt
   
 <hr>
 
+
+### Nested `Dropdown` menu. 
+Nested sub-menus are to be avoided because they are not well suited to mobile phones, both in the way they appear (not responsive) and the way they work. These are some reasons Boostrap does not support them natively. However, if you ever need them: 
+```HTML
+<bootstrap-dropdown-button btn-class="btn-danger m-1" btn-caption="Nested dropdown menu!">
+    [
+        ['first link','/link1.html'],
+        ['this is a button, not a link','(button)','buttonID'],
+        ['hr'],
+        ['submenu caption','(submenu)',[
+            ['first subitem','/page1.html'],
+            ['second subitem','/page2.html'],
+            ['third subbutton','(button)','buttonID'],
+        ]],
+        ['other link','/link3.html']
+    ]
+  </bootstrap-dropdown-button>
+```
+*Note:* You can implement multiple-level nested dropdowns, one inside another, but you are not advised to.
+  
+<hr>
+
+
 ### `Carousel` component. 
 `id` is mandatory (`class` is optional). Use an array with items of the form `[image-source, image-alt]`, one item per image. 
 ```HTML
@@ -87,7 +110,6 @@ Like the previous case, but it shows simple text as a trigger, instead of a butt
                 ]
         </bootstrap-carousel>
 ```
-*Note:* You may want to use original bootstrap's way for navigation (`navbar`) dropdowns.
   
 <hr>
 
@@ -99,11 +121,18 @@ Like the previous case, but it shows simple text as a trigger, instead of a butt
     ['Modal title','This is the modal body which <b>is a paragraph.</b>','OK']
 </bootstrap-modal>
 ```
-To open the above modal, run:
+To open the above modal, run the method:
 ```JavaScript
 Plus.showModal('myModal')
 ```
-Alternatively, you can use the original Boostrap's way: Set `data-bs-toggle="modal" data-bs-target="#myModal"` in your standard bootstrap button, as Bootstrap suggests. The `data-bs-target` attribute must match the id of the modal component.
+For example:
+```HTML
+<button type="button" class="btn btn-primary" onclick="Plus.showModal('myModal')">
+    Show live toast
+</button>
+```
+
+Alternatively, you can use the original Boostrap's way: Set `data-bs-toggle="modal" data-bs-target="#myModal"` in your standard bootstrap button, as Bootstrap suggests. Using this way, the `data-bs-target` attribute must match the id of the modal component.
 <hr>
 
 ### `Button` with `modal` **combined** in one component! *WOW!*
@@ -133,7 +162,11 @@ When you click on it, it hides its parent element
     ['Toast title','small note','This is the message of the toast.']
 </bootstrap-toast>
 ```
-To show this modal, you can use a standard Bootstrap button with the appropriate onclick event, and with the matching modal id and optional duration in milliseconds:
+To show this modal, you can use simply:
+```JavaScript
+Plus.showToast('#liveToast',7000)
+```
+where the second argument is optional and it indicates the duration of the modal. For example:
 ```HTML
 <button type="button" class="btn btn-primary" onclick="Plus.showToast('#liveToast',7000)">
     Show live toast
