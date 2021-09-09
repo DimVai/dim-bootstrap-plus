@@ -106,35 +106,35 @@ Plus.hide = (elementID) => {
     element.classList.add('d-none');
     return element;
 };
-    /** 
-     * Shows an element 
-     * @type {(elementID: string) => void}  
+/** 
+ * Shows an element 
+ * @type {(elementID: string) => void}  
  */
 Plus.show = (elementID) => {
     let element = document.getElementById(elementID);
     element.classList.remove('d-none');
     return element;
 };
-    /** 
-     * Hide an element's parent 
-     * @type {(elementID: string) => void}  
+/** 
+ * Hide an element's parent 
+ * @type {(elementID: string) => void}  
  */
 Plus.hideParent = function(element){element.parentElement.classList.add('d-none'); return element.parentElement};
-    /** 
-     * Adds a class to specific elements
-     * @param {string}  elements - The element's class or id (use "#" or ".")
-     * @param {string}  additionalClass - The  class to be added (do not use ".")
-     * */
+/** 
+ * Adds a class to specific elements
+ * @param {string}  elements - The element's class or id (use "#" or ".")
+ * @param {string}  additionalClass - The  class to be added (do not use ".")
+     */
 Plus.addClass = (elements,additionalClass)=>{
         let elementList = document.querySelectorAll(elements);
         elementList.forEach(element => element.classList.add(additionalClass));
         return elementList;
     };
-    /** 
-     * Change the value of a css variable 
-     * @type {(variable: string, value: string) => void}  
+/** 
+ * Change the value of a css variable 
+ * @type {(variable: string, value: string) => void}  
  */
-Plus.changeCSSvariable = (variable,value) => {document.documentElement.style.setProperty(variable, value); return value};
+Plus.setCssProperty = (variable,value) => {document.documentElement.style.setProperty(variable, value); return value};
 
 
 
