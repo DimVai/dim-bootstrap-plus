@@ -57,12 +57,12 @@ let Plus = {
         document.querySelectorAll('[data-plus-color]').forEach(function (element) {
             element.style.color = element.attributes['data-plus-color'].value;
         });
-        return "custom colors enabled";
+        return [...customButtons,...document.querySelectorAll('[data-plus-background]'),...document.querySelectorAll('[data-plus-color]')];
     },
 
      /** 
      * Shows a specific modal 
-     * @type {(modalId: string) => void}  
+     * @type {(modalId: string) => any}  
     */
     showModal: modalId => {
         let theModal = new bootstrap.Modal(document.getElementById(modalId));
@@ -84,7 +84,7 @@ let Plus = {
     },
     /** 
      * Changes the percentage of a Plus Progress component 
-     * @type {(elementID: string, value: number ) => void}  
+     * @type {(elementID: string, value: number ) => HTMLElement}  
     */
     changeProgress: (elementID, value) => {
         document.getElementById(elementID+'-progress').style.width = value;
