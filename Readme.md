@@ -128,7 +128,7 @@ Plus.showModal('myModal')
 For example:
 ```HTML
 <button type="button" class="btn btn-primary" onclick="Plus.showModal('myModal')">
-    Show live toast
+    Launch modal
 </button>
 ```
 
